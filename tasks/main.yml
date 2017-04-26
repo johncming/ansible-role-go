@@ -18,3 +18,11 @@
 - file:
     path: /usr/local/go/bin/go
     mode: 0755
+
+- file:
+    path: "{{ ansible_user_dir }}/.go"
+    state: directory
+
+- lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    line: "export GOPATH={{ ansible_user_dir }}/.go"
