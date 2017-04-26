@@ -8,9 +8,11 @@
 - unarchive:
     src: "{{ go_install_tmpfile }}"
     dest: /usr/local
+    remote_src: yes
+  become: yes
 
 - lineinfile:
-    path: "{{ ansible_user_dir }}"
+    path: "{{ ansible_user_dir }}/.bashrc"
     line: "export PATH=$PATH:/usr/local/go/bin"
 
 - file:
