@@ -1,5 +1,14 @@
 ---
 # tasks file for .
+
+- apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - make
+  become: yes
+
 - get_url:
     url: "{{ go_install_url }}"
     dest: "{{ go_install_tmpfile }}"
@@ -20,9 +29,17 @@
     mode: 0755
 
 - file:
-    path: "{{ ansible_user_dir }}/.go"
+    path: "{{ ansible_user_dir }}/.go/src"
     state: directory
 
 - lineinfile:
     path: "{{ ansible_user_dir }}/.bashrc"
     line: "export GOPATH={{ ansible_user_dir }}/.go"
+
+- command: "go get {{ item }}"
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"
+  with_items:
+    - github.com/rogpeppe/godef
+    - golang.org/x/tools/cmd/goimports
+    - golang.org/x/tools/cmd/guru
