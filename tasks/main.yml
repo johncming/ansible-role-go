@@ -22,7 +22,7 @@
 
 - lineinfile:
     path: "{{ ansible_user_dir }}/.bashrc"
-    line: "export PATH=$PATH:/usr/local/go/bin"
+    line: "export PATH=$PATH:/usr/local/go/bin:{{ ansible_user_dir }}/.go/bin"
 
 - file:
     path: /usr/local/go/bin/go
@@ -39,7 +39,10 @@
 - command: "go get {{ item }}"
   environment:
     PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"
+    GOPATH: "{{ ansible_user_dir }}/.go"
   with_items:
     - github.com/rogpeppe/godef
     - golang.org/x/tools/cmd/goimports
     - golang.org/x/tools/cmd/guru
+    - github.com/nsf/gocode
+    - golang.org/x/tools/cmd/gorename
