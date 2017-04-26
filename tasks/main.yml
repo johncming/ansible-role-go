@@ -1,2 +1,18 @@
 ---
 # tasks file for .
+- get_url:
+    url: "{{ go_install_url }}"
+    dest: "{{ go_install_tmpfile }}"
+    sha256sum: "{{ go_install_sha256 }}"
+
+- unarchive:
+    src: "{{ go_install_tmpfile }}"
+    dest: /usr/local
+
+- lineinfile:
+    path: "{{ ansible_user_dir }}"
+    line: "export PATH=$PATH:/usr/local/go/bin"
+
+- file:
+    path: /usr/local/go/bin/go
+    mode: 0755

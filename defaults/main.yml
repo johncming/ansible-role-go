@@ -1,2 +1,7 @@
 ---
 # defaults file for .
+go_install_url: https://storage.googleapis.com/golang/go1.8.1.linux-amd64.tar.gz
+go_install_filename: go1.8.1.linux-amd64.tar.gz
+go_install_sha256: a579ab19d5237e263254f1eac5352efcf1d70b9dacadb6d6bb12b0911ede8994
+go_install_tmpfile: /tmp/go.tar.gz
+go_check_sha256: no
