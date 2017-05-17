@@ -4,10 +4,10 @@
 - apt:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items:
     - git
     - make
-  become: yes
 
 - get_url:
     url: "{{ go_install_url }}"
@@ -18,7 +18,6 @@
     src: "{{ go_install_tmpfile }}"
     dest: /usr/local
     remote_src: yes
-  become: yes
 
 - lineinfile:
     path: "{{ ansible_user_dir }}/.bashrc"
