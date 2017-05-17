@@ -47,3 +47,4 @@
     - golang.org/x/tools/cmd/gorename
     - github.com/stretchr/testify/assert
     - github.com/govend/govend
+  when: go_mode == "dev"
