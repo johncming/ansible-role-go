@@ -28,17 +28,17 @@
     mode: 0755
 
 - file:
-    path: "{{ ansible_user_dir }}/.go/src"
+    path: "{{ go_path }}/src"
     state: directory
 
 - lineinfile:
     path: "{{ ansible_user_dir }}/.bashrc"
-    line: "export GOPATH={{ ansible_user_dir }}/.go"
+    line: "export GOPATH={{ go_path }}"
 
 - command: "go get {{ item }}"
   environment:
     PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"
-    GOPATH: "{{ ansible_user_dir }}/.go"
+    GOPATH: "{{ go_path }}"
   with_items:
     - github.com/rogpeppe/godef
     - golang.org/x/tools/cmd/goimports
